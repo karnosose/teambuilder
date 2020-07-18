@@ -3,80 +3,68 @@ const validEmailRegex = RegExp(
   );
 
 
-const validateForm = errors => {
-    let valid = true;
-    Object.values(errors).forEach(val => val.length > 0 && (valid = false));
-    return valid;
-};
+export const validateFormFields = userDetails => {
 
-
-export const validateFormFields = (name, value, stateErrors) => {
-
-    let errors = stateErrors;
+    let errors = {};
     
-    switch (name) {
-      case 'firstName': 
-        errors.firstName = 
-          value.match(/^[a-zA-Z]+$/)
-            ? ''
-            : 'name shouldn\'t be empty and  can contain only letters';
-        break;
-        case 'lastName': 
-        errors.lastName = 
-          value.match(/^[a-zA-Z]+$/)
-            ? ''
-            : 'last name shouldn\'t be empty and  can contain only letters';
-        break;
-      case 'email': 
-        errors.email = 
-          validEmailRegex.test(value)
-            ? ''
-            : 'Email is not valid!';
-        break;
-      case 'password': 
-        errors.password = 
-          value.length < 8
-            ? 'Password must be at least 8 characters long!'
-            : '';
-        break;
-        case 'sex': 
-        errors.sex = 
-          value.length < 1
-            ? 'please select your sex'
-            : '';
-        break;
-        case 'avatarUrl': 
-        errors.avatarUrl = 
-          value.length < 1
-            ? 'please put your avatar url'
-            : '';
-        break;
-        case 'companyId': 
-        errors.companyId = 
-          value.length < 1
-            ? 'please select company'
-            : '';
-        break;
-        case 'js': 
-        errors.js = 
-          value.length < 1
-            ? 'please type your js experience'
-            : '';
-        break;
-        case 'react': 
-        errors.react = 
-          value.length < 1
-            ? 'please type your react experience'
-            : '';
-        break;
-        case 'birdthDate': 
-        errors.birdthDate = 
-          value.length < 1
-            ? 'Password must be at least 8 characters long!'
-            : '';
-        break;
-      default:
-        break;
-    }
+    Object.keys(userDetails).forEach(name => {
+        let value = userDetails[name];
+        switch (name) {
+            case 'firstName': 
+                if(!value.match(/^[a-zA-Z]+$/)){
+                    errors.firstName = 'name shouldn\'t be empty and  can contain only letters'
+                }
+              break;
+              case 'lastName': 
+                if(!value.match(/^[a-zA-Z]+$/)){
+                    errors.lastName = 'last name shouldn\'t be empty and  can contain only letters'
+                }
+              break;
+            case 'email': 
+                if(!validEmailRegex.test(value)){
+                    errors.email = 'Email is not valid!'
+                }
+              break;
+            case 'password': 
+                if(value.length < 8){
+                    errors.password = 'Password must be at least 8 characters long!'
+                }
+              break;
+              case 'sex': 
+                if(value.length < 1){
+                    errors.sex = 'please select your sex'
+                }
+              break;
+              case 'avatarUrl': 
+                if(value.length < 1){
+                    errors.avatarUrl = 'please put your avatar url'
+                }
+              break;
+              case 'companyId': 
+              
+                if(value.length < 1){
+                    errors.companyId = 'please select company'
+                }
+              break;
+              case 'js':  
+                if(value.length < 1){
+                    errors.js = 'please type your js experience'
+                }
+              break;
+              case 'react': 
+                if(value.length < 1){
+                    errors.react = 'please type your react experience'
+                }
+              break;
+              case 'birdthDate': 
+                if(value.length < 1){
+                    errors.birdthDate = 'Password must be at least 8 characters long!'
+                }
+              break;
+            default:
+              break;
+          }
+    })
+
     return errors;
 }

@@ -9,63 +9,68 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+import {changeDateFormat} from '../../helpers/changeDateFormat';
 import {validateFormFields} from '../../helpers/validate';
 
 import "react-datepicker/dist/react-datepicker.css";
 import {styles} from './RegisterPage.style';
 import {withStyles} from '@material-ui/core';
 
-const validEmailRegex = RegExp(
-  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-);
-
 class RegisterPage extends Component{
   state = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    sex: '',
-    avatarUrl: '',
-    jsExperience: null,
-    reactExperience: null,
-    companyId: null,
-    birthDate: null,
-    errors: {
+    userDetails: {
       firstName: '',
       lastName: '',
       email: '',
       password: '',
       sex: '',
       avatarUrl: '',
-      jsExperience: '',
-      reactExperience: '',
+      jsExperience: 0,
+      reactExperience: 0,
       companyId: '',
-      birthDate: '',
-    }
+      birthDate: Date.now(),
+    },
+    errors: {}
+  }
 
+  checkformFields = data => {
+    let valid = false
+    Object.values(data).forEach(val => val.length > 0 && (valid = true));
+    return valid
   }
 
   handleChange = (event) => {
     const {name, value} = event.target;
-
-    const errors = validateFormFields(name, value, this.state.errors)
     
-    this.setState({[name]: value, errors: errors});
+    this.setState({...this.state, userDetails: {...this.state.userDetails, [name]: value}});
   }
 
-  validateForm = errors => {
-    let valid = true;
-    Object.values(errors).forEach(val => val.length > 0 && (valid = false));
-    return valid;
-  };
+  handleBirthDateChange = date => {
+    const birthDate = changeDateFormat(date)
+    this.setState({...this.state, userDetails: {...this.state.userDetails, birthDate: birthDate}})
+  }
+
+  registerUser = userData => {
+    fetch('api/v1/user/register', {
+      method: 'post',
+      body: JSON.stringify(userData)
+    })
+    .then(response =>  console.log(response.json()))
+    .then()
+  }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    if(this.validateForm(this.state.errors)) {
-      
+
+    const errors = validateFormFields(this.state.userDetails)
+
+    this.setState({...this.state, errors: errors});
+
+    if(Object.entries(errors).length === 0) {
+      console.log(10)
+      // this.registerUser(this.state.userDetails)
     }else{
-      console.error('Invalid Form')
+      console.error('20')
     }
   }
   render(){
@@ -87,6 +92,7 @@ class RegisterPage extends Component{
                 name="email"
                 label="email"
                 variant="outlined"
+                value={this.state.userDetails.email}
                 onChange={this.handleChange}
               />
             </div>
@@ -99,6 +105,7 @@ class RegisterPage extends Component{
                 type="password"
                 autoComplete="current-password"
                 variant="outlined"
+                value={this.state.userDetails.password}
                 onChange={this.handleChange}
               />
             </div>
@@ -110,6 +117,7 @@ class RegisterPage extends Component{
                 name="firstName"
                 label="first name"
                 variant="outlined"
+                value={this.state.userDetails.firstName}
                 onChange={this.handleChange}
               />
             </div>
@@ -121,6 +129,7 @@ class RegisterPage extends Component{
                 label="last name"
                 name="lastName"
                 variant="outlined"
+                value={this.state.userDetails.lastName}
                 onChange={this.handleChange}
               />
             </div>
@@ -129,8 +138,8 @@ class RegisterPage extends Component{
               <DatePicker 
                 name="birthdate"
                 className={classes.dataPicker}
-                selected={this.state.birthDate} 
-                onChange={date => this.setState({...this.state, birthDate: date})}
+                selected={this.state.userDetails.birthDate} 
+                onChange={date => this.handleBirthDateChange(date)}
                 />
             </div>
             <div>
@@ -141,6 +150,7 @@ class RegisterPage extends Component{
                 label="avatar url"
                 name="avatarUrl"
                 variant="outlined"
+                value={this.state.userDetails.avatarUrl}
                 onChange={this.handleChange}
               />
             </div>
@@ -150,7 +160,7 @@ class RegisterPage extends Component{
                 <Select
                   labelId="demo-simple-select-outlined-label"
                   id="demo-simple-select-outlined"
-                  value={this.state.sex}
+                  value={this.state.userDetails.sex}
                   onChange={this.handleChange}
                   label="Sex"
                   name="sex"
@@ -164,7 +174,7 @@ class RegisterPage extends Component{
                 <Select
                   labelId="demo-simple-select-outlined-label"
                   id="demo-simple-select-outlined"
-                  value={this.state.sex}
+                  value={this.state.userDetails.companyId}
                   name="companyId"
                   onChange={this.handleChange}
                   label="Company ID"
@@ -181,6 +191,7 @@ class RegisterPage extends Component{
                 label="Js experience (months)"
                 name="jsExperience"
                 type="number"
+                value={this.state.userDetails.jsExperience}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -196,6 +207,7 @@ class RegisterPage extends Component{
                 InputLabelProps={{
                   shrink: true,
                 }}
+                value={this.state.userDetails.reactExperience}
                 variant="outlined"
                 onChange={this.handleChange}
               />
@@ -205,6 +217,7 @@ class RegisterPage extends Component{
               variant="contained" 
               color="primary"
               className={classes.registerButton}
+              onClick={e => this.handleSubmit(e)}
             >
               Register
             </Button>
