@@ -4,9 +4,9 @@ import {styles} from './LoginPage.style';
 import {withStyles} from '@material-ui/core';
 
 class LoginPage extends Component{
-    render(){
-        return ''
-    }
+  render(){
+      return ''
+  }
 }
 
 export default withStyles(styles)(LoginPage);
