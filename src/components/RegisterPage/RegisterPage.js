@@ -46,17 +46,23 @@ class RegisterPage extends Component{
   }
 
   handleBirthDateChange = date => {
-    const birthDate = changeDateFormat(date)
-    this.setState({...this.state, userDetails: {...this.state.userDetails, birthDate: birthDate}})
+    // const birthDate = changeDateFormat(date)
+    this.setState({...this.state, userDetails: {...this.state.userDetails, birthDate: date}})
   }
 
   registerUser = userData => {
-    fetch('api/v1/user/register', {
-      method: 'post',
+    fetch('https://picsart-bootcamp-2020-api.herokuapp.com/api/v1/users/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      
       body: JSON.stringify(userData)
     })
-    .then(response =>  console.log(response.json()))
-    .then()
+    .then(response =>  {
+      if(response.status !== 200){
+        throw Error(response.statusText)
+      }
+    })
+    .then(response => console.log(response))
   }
 
   handleSubmit = (event) => {
@@ -65,10 +71,14 @@ class RegisterPage extends Component{
     const errors = validateFormFields(this.state.userDetails)
 
     this.setState({...this.state, errors: errors});
-
+    
     if(Object.entries(errors).length === 0) {
-      console.log(10)
-      // this.registerUser(this.state.userDetails)
+      const birthDate = changeDateFormat(this.state.userDetails.birthDate)
+      const data = this.state.userDetails;
+      data.birthDate = birthDate;
+      data.jsExperience = +data.jsExperience;
+      data.reactExperience = +data.reactExperience;
+      this.registerUser(data)
     }else{
       console.error('20')
     }
@@ -179,8 +189,8 @@ class RegisterPage extends Component{
                   onChange={this.handleChange}
                   label="Company ID"
                 >
-                  <MenuItem value='male'>1</MenuItem>
-                  <MenuItem value='female'>2</MenuItem>
+                  <MenuItem value={1}>1</MenuItem>
+                  <MenuItem value={2}>2</MenuItem>
                 </Select>
               </FormControl>
             </div>

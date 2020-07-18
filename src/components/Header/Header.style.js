@@ -11,6 +11,6 @@ export const styles = {
     menuItems: {
         textDecoration: 'none',
         color: 'white',
-        margin: '0 20px'
+        margin: '0 15px'
     }
 }
