@@ -53,9 +53,18 @@ export const styles = {
     }
   },
   sexForm:{
-    width:200,
+    width:222,
     display: 'flex',
     justifyContent: 'flex-start'
+  },
+  companyId: {
+    width:222,
+    display: 'flex',
+    justifyContent: 'flex-start'
+  },
+  sexAndCompany: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   numberField: {
     display: 'flex',
