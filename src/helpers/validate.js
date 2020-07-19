@@ -47,13 +47,13 @@ export const validateFormFields = userDetails => {
                     errors.companyId = 'please select company'
                 }
               break;
-              case 'js':  
-                if(value.length < 1 && value < 0){
+              case 'jsExperience':  
+                if(!value.length || value.length < 1 || value < 0){
                     errors.js = 'please type your js experience'
                 }
               break;
-              case 'react': 
-                if(value.length < 1 && value < 0){
+              case 'reactExperience': 
+                if(!value.length || value.length < 1 || value < 0){
                     errors.react = 'please type your react experience'
                 }
               break;

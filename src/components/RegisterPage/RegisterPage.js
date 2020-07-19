@@ -25,8 +25,8 @@ class RegisterPage extends Component{
       password: '',
       sex: '',
       avatarUrl: '',
-      jsExperience: 0,
-      reactExperience: 0,
+      jsExperience: '',
+      reactExperience: '',
       companyId: '',
       birthDate: Date.now(),
     },
@@ -90,7 +90,6 @@ class RegisterPage extends Component{
 
     return (
       <div className={classes.form}>
-        {console.log(this.state)}
         <Typography variant='h5'>
           Register
         </Typography>
@@ -179,7 +178,13 @@ class RegisterPage extends Component{
               />
             </div>
             <div className={classes.sexAndCompany}>
-              <FormControl variant="outlined" className={classes.sexForm} required>
+              <FormControl 
+                variant="outlined" 
+                className={classes.sexForm} 
+                required                 
+                error={this.state.errors.sex ? true : false}
+
+              >
                 <InputLabel id="demo-simple-select-outlined-label">Sex</InputLabel>
                 <Select
                   labelId="demo-simple-select-outlined-label"
@@ -193,7 +198,13 @@ class RegisterPage extends Component{
                   <MenuItem value='female'>female</MenuItem>
                 </Select>
               </FormControl>
-              <FormControl variant="outlined" className={classes.companyId}  required>
+              <FormControl 
+                variant="outlined" 
+                className={classes.companyId}  
+                required 
+                error={this.state.errors.companyId ? true : false}
+
+              > 
                 <InputLabel id="demo-simple-select-outlined-label">Company ID</InputLabel>
                 <Select
                   labelId="demo-simple-select-outlined-label"
@@ -202,8 +213,6 @@ class RegisterPage extends Component{
                   name="companyId"
                   onChange={this.handleChange}
                   label="Company ID"
-                  error={this.state.errors.companyId ? true : false}
-                  helperText={this.state.errors.companyId}
                 >
                   <MenuItem value={1}>1</MenuItem>
                   <MenuItem value={2}>2</MenuItem>
@@ -223,8 +232,8 @@ class RegisterPage extends Component{
                 }}
                 variant="outlined"
                 onChange={this.handleChange}
-                error={this.state.errors.jsExperience ? true : false}
-                helperText={this.state.errors.jsExperience}
+                error={this.state.errors.js ? true : false}
+                helperText={this.state.errors.js}
               />
               <TextField
                 required
@@ -238,8 +247,8 @@ class RegisterPage extends Component{
                 value={this.state.userDetails.reactExperience}
                 variant="outlined"
                 onChange={this.handleChange}
-                error={this.state.errors.reactExperience ? true : false}
-                helperText={this.state.errors.reactExperience}
+                error={this.state.errors.react ? true : false}
+                helperText={this.state.errors.react}
               />
             </div>
             <div>

@@ -73,6 +73,7 @@ export const styles = {
     width:'100%'
   },
   registerButton: {
-    margin: '40px 0 80px 0'
+    margin: '40px 0 80px 0',
+    padding: '10px 30px'
   }
 }
