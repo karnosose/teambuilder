@@ -41,7 +41,9 @@ class RegisterPage extends Component{
 
   handleChange = (event) => {
     const {name, value} = event.target;
-    
+    var myRegex = /(https?:\/\/.*\.(?:png|jpg))/i;
+
+
     this.setState({...this.state, userDetails: {...this.state.userDetails, [name]: value}});
   }
 
@@ -62,7 +64,7 @@ class RegisterPage extends Component{
         throw Error(response.statusText)
       }
     })
-    .then(response => console.log(response))
+    .then(response => this.props.history.push('/login'))
   }
 
   handleSubmit = (event) => {
@@ -98,12 +100,15 @@ class RegisterPage extends Component{
               <TextField
                 className={classes.formField}
                 required
+                error={this.state.errors.email? true : false}
                 id="outlined-required"
                 name="email"
                 label="email"
                 variant="outlined"
                 value={this.state.userDetails.email}
                 onChange={this.handleChange}
+                helperText={this.state.errors.email}
+
               />
             </div>
             <div>
@@ -117,6 +122,9 @@ class RegisterPage extends Component{
                 variant="outlined"
                 value={this.state.userDetails.password}
                 onChange={this.handleChange}
+                error={this.state.errors.password ? true : false}
+                helperText={this.state.errors.password}
+
               />
             </div>
             <div>
@@ -129,6 +137,8 @@ class RegisterPage extends Component{
                 variant="outlined"
                 value={this.state.userDetails.firstName}
                 onChange={this.handleChange}
+                error={this.state.errors.firstName ? true : false}
+                helperText={this.state.errors.firstName}
               />
             </div>
             <div>
@@ -141,6 +151,8 @@ class RegisterPage extends Component{
                 variant="outlined"
                 value={this.state.userDetails.lastName}
                 onChange={this.handleChange}
+                error={this.state.errors.lastName ? true : false}
+                helperText={this.state.errors.lastName}
               />
             </div>
             <div className={classes.dateField}>
@@ -162,6 +174,8 @@ class RegisterPage extends Component{
                 variant="outlined"
                 value={this.state.userDetails.avatarUrl}
                 onChange={this.handleChange}
+                error={this.state.errors.avatarUrl ? true : false}
+                helperText={this.state.errors.avatarUrl}
               />
             </div>
             <div className={classes.sexAndCompany}>
@@ -188,6 +202,8 @@ class RegisterPage extends Component{
                   name="companyId"
                   onChange={this.handleChange}
                   label="Company ID"
+                  error={this.state.errors.companyId ? true : false}
+                  helperText={this.state.errors.companyId}
                 >
                   <MenuItem value={1}>1</MenuItem>
                   <MenuItem value={2}>2</MenuItem>
@@ -207,6 +223,8 @@ class RegisterPage extends Component{
                 }}
                 variant="outlined"
                 onChange={this.handleChange}
+                error={this.state.errors.jsExperience ? true : false}
+                helperText={this.state.errors.jsExperience}
               />
               <TextField
                 required
@@ -220,6 +238,8 @@ class RegisterPage extends Component{
                 value={this.state.userDetails.reactExperience}
                 variant="outlined"
                 onChange={this.handleChange}
+                error={this.state.errors.reactExperience ? true : false}
+                helperText={this.state.errors.reactExperience}
               />
             </div>
             <div>

@@ -2,6 +2,7 @@ const validEmailRegex = RegExp(
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   );
 
+const validImgRegex = RegExp(/(https?:\/\/.*\.(?:png|jpg))/i);
 
 export const validateFormFields = userDetails => {
 
@@ -36,8 +37,8 @@ export const validateFormFields = userDetails => {
                 }
               break;
               case 'avatarUrl': 
-                if(value.length < 1){
-                    errors.avatarUrl = 'please put your avatar url'
+                if(!validImgRegex.test(value)){
+                    errors.avatarUrl = 'avatar should pe in .jpg or .png format'
                 }
               break;
               case 'companyId': 
@@ -47,18 +48,18 @@ export const validateFormFields = userDetails => {
                 }
               break;
               case 'js':  
-                if(value.length < 1){
+                if(value.length < 1 && value < 0){
                     errors.js = 'please type your js experience'
                 }
               break;
               case 'react': 
-                if(value.length < 1){
+                if(value.length < 1 && value < 0){
                     errors.react = 'please type your react experience'
                 }
               break;
               case 'birdthDate': 
                 if(value.length < 1){
-                    errors.birdthDate = 'Password must be at least 8 characters long!'
+                    errors.birdthDate = 'select your birdth date'
                 }
               break;
             default:
