@@ -4,4 +4,5 @@ export const MENU_ITEMS = [
     {url: '/projects', title: 'Projects'},
     {url: '/login', title: 'Log in'},
     {url: '/register', title:'Register'},
+    {url: '/profile', title: 'Profile'}
 ];

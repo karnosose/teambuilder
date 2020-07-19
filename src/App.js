@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-do
 import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage'
-
+import Profile from './components/Profile/Profile'
 
 import {styles} from './App.style';
 import {withStyles} from '@material-ui/core';
@@ -27,6 +27,9 @@ class App extends Component {
           </Route>
           <Route path='/register'>
             <RegisterPage />
+          </Route>
+          <Route path="/profile">
+             <Profile />
           </Route>
         </Switch>
       </Router>
