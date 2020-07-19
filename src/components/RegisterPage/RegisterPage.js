@@ -41,8 +41,6 @@ class RegisterPage extends Component{
 
   handleChange = (event) => {
     const {name, value} = event.target;
-    var myRegex = /(https?:\/\/.*\.(?:png|jpg))/i;
-
 
     this.setState({...this.state, userDetails: {...this.state.userDetails, [name]: value}});
   }
