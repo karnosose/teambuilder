@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-
+import AccountCircleSharpIcon from '@material-ui/icons/AccountCircleSharp';
 
 import {styles} from './Header.style';
 import {withStyles} from '@material-ui/core';
@@ -29,13 +29,24 @@ class Header extends Component{
 
     const MenuItems = () => {
       return MENU_ITEMS.map(item => (
+        (item.title === 'Profile') ? (
+          <Link 
+          to={item.url} 
+          key={uuid()}
+          className={classes.menuItem}
+        >
+          <AccountCircleSharpIcon />
+
+         </Link>
+        ) : (
          <Link 
           to={item.url} 
           key={uuid()}
-          className={classes.menuItems}
+          className={classes.menuItem}
         >
-           {item.title}
+          {item.title}
          </Link>
+        )
        ))
     }
     
@@ -55,7 +66,7 @@ class Header extends Component{
             </Typography>
           </div>
           
-          <div>
+          <div className={classes.menuItems}>
             <MenuItems />
             {this.state.loggedIn && (
               <IconButton

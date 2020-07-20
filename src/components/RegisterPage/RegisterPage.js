@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
+import {registerUser} from '../../actions/userActions';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -33,12 +36,6 @@ class RegisterPage extends Component{
     errors: {}
   }
 
-  checkformFields = data => {
-    let valid = false
-    Object.values(data).forEach(val => val.length > 0 && (valid = true));
-    return valid
-  }
-
   handleChange = (event) => {
     const {name, value} = event.target;
 
@@ -46,23 +43,7 @@ class RegisterPage extends Component{
   }
 
   handleBirthDateChange = date => {
-    // const birthDate = changeDateFormat(date)
     this.setState({...this.state, userDetails: {...this.state.userDetails, birthDate: date}})
-  }
-
-  registerUser = userData => {
-    fetch('https://picsart-bootcamp-2020-api.herokuapp.com/api/v1/users/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      
-      body: JSON.stringify(userData)
-    })
-    .then(response =>  {
-      if(response.status !== 200){
-        throw Error(response.statusText)
-      }
-    })
-    .then(response => this.props.history.push('/login'))
   }
 
   handleSubmit = (event) => {
@@ -78,11 +59,12 @@ class RegisterPage extends Component{
       data.birthDate = birthDate;
       data.jsExperience = +data.jsExperience;
       data.reactExperience = +data.reactExperience;
-      this.registerUser(data)
+      this.props.registerUser(data)
     }else{
       console.error('20')
     }
   }
+
   render(){
     const {classes} = this.props;
 
@@ -265,5 +247,14 @@ class RegisterPage extends Component{
     )
   }
 }
+const mapStateToProps = state => {
+  return {};
+};
 
-export default withStyles(styles)(RegisterPage)
+const mapDispatchToProprs = (dispatch) => {
+  return {
+    registerUser: (data) => dispatch(registerUser(data)),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProprs)(withStyles(styles)(RegisterPage));

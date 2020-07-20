@@ -9,6 +9,11 @@ class Profile extends Component{
         this.props.getUsers()
     }
 
+    updateProfile(){
+
+        this.props.editUser()
+    }
+
     render(){
         return (
             <div>

@@ -7,24 +7,19 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage'
 import Profile from './components/Profile/Profile'
 
-import {styles} from './App.style';
-import {withStyles} from '@material-ui/core';
+import {PrivateRoute} from './components/PrivateRoute';
 
 class App extends Component {
 
   render() {
 
-  const {classes} = this.props; 
-
     return (
       <Router>
-        <div>
-          <Header />
-        </div>
+        <Header />
         <Switch>
-          <Route path='/login'>
+          <PrivateRoute path='/login'>
             <LoginPage />
-          </Route>
+          </PrivateRoute>
           <Route path='/register'>
             <RegisterPage />
           </Route>
@@ -38,4 +33,4 @@ class App extends Component {
   }
 }
 
-export default withStyles(styles)(App);
+export default App;

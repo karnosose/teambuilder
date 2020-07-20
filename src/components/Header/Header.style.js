@@ -8,9 +8,12 @@ export const styles = {
         flexDirection: 'row',
         alignItems: 'center'
     },
-    menuItems: {
+    menuItem: {
         textDecoration: 'none',
         color: 'white',
         margin: '0 15px'
+    },
+    menuItems: {
+        display: 'flex'
     }
 }

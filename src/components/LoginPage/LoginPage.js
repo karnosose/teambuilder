@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -6,37 +7,29 @@ import Typography from '@material-ui/core/Typography'
 
 import {validEmailRegex} from '../../helpers/validate';
 
+import {login} from '../../actions/userActions';
 import {styles} from './LoginPage.style';
 import {withStyles} from '@material-ui/core';
 
 class LoginPage extends Component{
   state = {
     email: '',
-    password: ''
+    password: '',
+    errors: []
   }
 
   handleChange = e => {
     const {name, value } = e.target;
-    console.log(name)
     this.setState({...this.state, [name]: value})
   }
 
   handleSubmit = e => {
-    const validEmail = validEmailRegex.test(this.state.mail)
-    // if(validEmail) {
-      fetch('https://picsart-bootcamp-2020-api.herokuapp.com/api/v1/users/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      
-      body: JSON.stringify(this.state)
-    })
-    .then(response =>  {
-      if(response.status !== 200){
-        throw Error(response.statusText)
-      }
-    })
-    .then(response => console.log(response))
-    // }
+    const validEmail = validEmailRegex.test(this.state.email)
+    if(validEmail) {
+      this.props.login(this.state.email, this.state.password);
+    } else {
+      this.setState({...this.state, errors: 'email is not valid'})
+    }
   }
 
   render(){
@@ -58,8 +51,8 @@ class LoginPage extends Component{
                 variant="outlined"
                 value={this.state.email}
                 onChange={this.handleChange}
-                // error={this.state.errors.email? true : false}
-                // helperText={this.state.errors.email}
+                error={this.state.errors.length > 0 ? true : false}
+                helperText={this.state.errors}
               />
             </div>
             <div>
@@ -95,4 +88,17 @@ class LoginPage extends Component{
   }
 }
 
-export default withStyles(styles)(LoginPage);
+const mapStateToProps = state => {
+  return {
+    serverError: state.serverError
+  };
+};
+
+const mapDispatchToProprs = (dispatch) => {
+  return {
+    login: (email, password) => dispatch(login(email, password)),
+  }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProprs)(withStyles(styles)(LoginPage));
