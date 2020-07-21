@@ -23,7 +23,7 @@ const userReducer = (state =  initialstate, action) => {
             return {
                 ...state, topics: action.topics
             }
-        case SET_TOPICS: 
+        case SET_PROJECTS: 
             return {
                 ...state, projects: action.projects
             }

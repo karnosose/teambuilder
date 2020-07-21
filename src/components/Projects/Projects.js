@@ -6,7 +6,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-
 import {styles} from './Projects.style';
 import {withStyles} from '@material-ui/core';
 
@@ -16,24 +15,33 @@ class Projects extends Component{
 
         return (
             <div>
-                <h2 className={classes.title}>Topics</h2>
-                {/* {Projects.map(topic => {
+                {console.log(projects, 1000)}
+                <h2 className={classes.title}>Projects</h2>
+                {projects.map(project => {
                     return (
-                        <Card className={classes.root}>
-                            <div className={classes.details} key={uuid()}>
+                        <Card className={classes.root} key={uuid()}>
+                            <div className={classes.details} >
                                 <CardContent className={classes.content}>
-                                    <Typography component="h5" variant="h5">
-                                        {topic.title}
-                                    </Typography>
-                                    <Typography>
-                                        Votes: {topic.votingsCount}
-                                    </Typography>
+                                    <div className={classes.projectTitle}>
+                                        <Typography component="h5" variant="h5">
+                                            {project.title}
+                                        </Typography>
+                                    </div>
+                                    <div className={classes.descAndVotes}>
+                                        <Typography className={classes.description}>
+                                            {project.description}
+                                        </Typography>
+                                        <Typography>
+                                            Votes: {project.votingsCount}
+                                        </Typography>
+                                    </div>
+                                    
                                 </CardContent>
                             </div>
                         </Card>
 
                     )
-                })} */}
+                })}
             </div>
         )
     }
