@@ -23,7 +23,7 @@ export const styles = {
         alignItems: 'center',
         padding: '20px'
     },
-    projectTitle: {
+    teamTitle: {
         display: 'flex',
         alignItems: 'center',
         padding:20,

@@ -28,7 +28,7 @@ class Profile extends Component{
                     image={currentUser.avatarUrl}
                     title="Contemplative Reptile"
                 />
-                <CardContent classname={classes.profileDetails}>
+                <CardContent className={classes.profileDetails}>
                 <Typography gutterBottom variant="h5" component="h2" className={classes.fullName}>
                     {currentUser.firstName} {currentUser.lastName}
                 </Typography>
