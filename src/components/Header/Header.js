@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import  {Link} from 'react-router-dom'
-import uuid from 'react-uuid'
+import uuid from 'react-uuid';
+import { connect } from 'react-redux';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,16 +11,22 @@ import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AccountCircleSharpIcon from '@material-ui/icons/AccountCircleSharp';
 
+import {logOut} from '../../actions/userActions';
+
 import {styles} from './Header.style';
 import {withStyles} from '@material-ui/core';
 
-import {MENU_ITEMS} from '../../constants/menuItems';
-import { connect } from 'react-redux';
 
 
 class Header extends Component{
   state = {
     loggedIn: false
+  }
+
+  handleLogOut = () => {
+    localStorage.removeItem('token')
+
+    this.props.logOut();
   }
   render(){
 
@@ -28,26 +35,47 @@ class Header extends Component{
 
     const MenuItems = () => {
       if(this.props.currentUser.email){
-        return MENU_ITEMS.map(item => (
-          (item.title === 'Profile') ? (
+        return (
+          <>
             <Link 
-            to={item.url} 
-            key={uuid()}
-            className={classes.menuItem}
-          >
-            <AccountCircleSharpIcon />
-  
+              to='/teams' 
+              key={uuid()}
+              className={classes.menuItem}
+            >
+              Teams
            </Link>
-          ) : (
            <Link 
-            to={item.url} 
-            key={uuid()}
-            className={classes.menuItem}
-          >
-            {item.title}
+              to='/topics' 
+              key={uuid()}
+              className={classes.menuItem}
+            >
+              Projects
            </Link>
-          )
-         ))
+           <Link 
+              to='/projects' 
+              key={uuid()}
+              className={classes.menuItem}
+            >
+              Topics
+           </Link>
+           <Link 
+              to='/' 
+              key={uuid()}
+              className={classes.menuItem}
+              onClick={this.handleLogOut}
+            >
+              Log out
+           </Link>
+            <Link 
+              to='/profile' 
+              key={uuid()}
+              className={classes.menuItem}
+            >
+              <AccountCircleSharpIcon />
+            </Link>
+            
+          </>
+        )
       } else {
         return (
           <>
@@ -103,4 +131,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(Header));
+const mapDispatchToProps = (dispatch) => {
+  return {
+      logOut: (token) => dispatch(logOut(token)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header));

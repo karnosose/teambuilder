@@ -1,5 +1,6 @@
 export const SET_CURRENT_USER = 'set_current_user';
 export const SET_SERVER_ERROR ='SET_SERVER_ERROR';
+export const LOG_OUT = 'LOG_OUT'
 
 const URL = 'https://picsart-bootcamp-2020-api.herokuapp.com/api/v1'
 
@@ -10,6 +11,11 @@ export const setCurrentUser = user => {
     }
 }
 
+export const setUserLogOut = () => {
+    return {
+        type: LOG_OUT
+    }
+}
 export const getUsers = (token) => {
     return (dispatch) => {
         fetch(`${URL}/users`, {
@@ -18,7 +24,22 @@ export const getUsers = (token) => {
             }
         })
         .then(res => res.json())
-        .then(res => dispatch(setCurrentUser(res)))
+        .then(res => dispatch(setCurrentUser(res))
+        )
+    }
+}
+
+export const logOut = (token) => {
+    return (dispatch) => {
+        fetch(`${URL}/users/logout`, {
+            headers: {
+                token: token,
+            }
+        })
+        .then(res => res.json())
+        .then(res => console.log(res, 101054965265))
+        .then(res => dispatch(setUserLogOut(res))
+        )
     }
 }
 

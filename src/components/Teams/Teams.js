@@ -34,13 +34,26 @@ class Teams extends Component{
                                             {team.name}
                                         </Typography>
                                     </div>
-                                    <div className={classes.descAndVotes}>
-                                        <Typography className={classes.description}>
-                                            {team.project}
-                                        </Typography>
-                                        <Typography>
-                                            {team.topic}
-                                        </Typography>
+                                    <div className={classes.teamContent}>
+                                        <div className={classes.projectAndTopic}>
+                                            <Typography className={classes.description}>
+                                            Project:  {team.project}
+                                            </Typography>
+                                            <Typography>
+                                                Topic: {team.topic}
+                                            </Typography>
+                                        </div>
+                                        <div className={classes.teamMembers}>
+                                        {
+                                            team.members.map(member => {
+                                                return (
+                                                    <Typography>
+                                                        {member.firstName} {member.lastName}
+                                                    </Typography>
+                                                )
+                                            })
+                                        }
+                                    </div>
                                     </div>
                                     
                                 </CardContent>

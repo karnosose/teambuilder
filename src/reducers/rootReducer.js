@@ -1,4 +1,4 @@
-import {SET_CURRENT_USER, SET_SERVER_ERROR} from '../actions/userActions';
+import {SET_CURRENT_USER, SET_SERVER_ERROR, LOG_OUT} from '../actions/userActions';
 import {SET_TOPICS} from '../actions/topicActions';
 import {SET_PROJECTS} from '../actions/projectActions';
 import {SET_TEAMS} from '../actions/teamActions';
@@ -16,6 +16,10 @@ const userReducer = (state =  initialstate, action) => {
         case SET_CURRENT_USER : 
             return {
                 ...state, currentUser: action.user 
+            }
+        case LOG_OUT : 
+            return {
+                ...state, currentUser: {} 
             }
         case SET_SERVER_ERROR:
             return {
