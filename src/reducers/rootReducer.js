@@ -19,7 +19,7 @@ const userReducer = (state =  initialstate, action) => {
             }
         case LOG_OUT : 
             return {
-                ...state, currentUser: {} 
+                 ...state, currentUser: {}
             }
         case SET_SERVER_ERROR:
             return {

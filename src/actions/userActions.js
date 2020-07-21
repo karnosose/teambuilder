@@ -37,8 +37,7 @@ export const logOut = (token) => {
             }
         })
         .then(res => res.json())
-        .then(res => console.log(res, 101054965265))
-        .then(res => dispatch(setUserLogOut(res))
+        .then(dispatch(setUserLogOut())
         )
     }
 }

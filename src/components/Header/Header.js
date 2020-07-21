@@ -24,9 +24,8 @@ class Header extends Component{
   }
 
   handleLogOut = () => {
+    this.props.logOut(JSON.stringify(localStorage.getItem('token')));
     localStorage.removeItem('token')
-
-    this.props.logOut();
   }
   render(){
 
@@ -49,14 +48,14 @@ class Header extends Component{
               key={uuid()}
               className={classes.menuItem}
             >
-              Projects
+              Topics
            </Link>
            <Link 
               to='/projects' 
               key={uuid()}
               className={classes.menuItem}
             >
-              Topics
+              Projects
            </Link>
            <Link 
               to='/' 
