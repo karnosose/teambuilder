@@ -19,7 +19,7 @@ export const styles = {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 'auto'
+        margin: 'auto',
     },
     editUser: {
         background: '#3f51b5',
