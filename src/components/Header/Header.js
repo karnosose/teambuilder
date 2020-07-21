@@ -14,6 +14,7 @@ import {styles} from './Header.style';
 import {withStyles} from '@material-ui/core';
 
 import {MENU_ITEMS} from '../../constants/menuItems';
+import { connect } from 'react-redux';
 
 
 class Header extends Component{
@@ -22,32 +23,53 @@ class Header extends Component{
   }
   render(){
 
-    const handleProfileMenuOpen = (event) => {
-        // setAnchorEl(event.currentTarget);
-      };
+  
     const {classes} = this.props;
 
     const MenuItems = () => {
-      return MENU_ITEMS.map(item => (
-        (item.title === 'Profile') ? (
-          <Link 
-          to={item.url} 
-          key={uuid()}
-          className={classes.menuItem}
-        >
-          <AccountCircleSharpIcon />
-
-         </Link>
-        ) : (
-         <Link 
-          to={item.url} 
-          key={uuid()}
-          className={classes.menuItem}
-        >
-          {item.title}
-         </Link>
+      if(this.props.currentUser.email){
+        return MENU_ITEMS.map(item => (
+          (item.title === 'Profile') ? (
+            <Link 
+            to={item.url} 
+            key={uuid()}
+            className={classes.menuItem}
+          >
+            <AccountCircleSharpIcon />
+  
+           </Link>
+          ) : (
+           <Link 
+            to={item.url} 
+            key={uuid()}
+            className={classes.menuItem}
+          >
+            {item.title}
+           </Link>
+          )
+         ))
+      } else {
+        return (
+          <>
+            <Link 
+              to='/login' 
+              key={uuid()}
+              className={classes.menuItem}
+            >
+            Log in
+            </Link>
+            <Link 
+                to='/register' 
+                key={uuid()}
+                className={classes.menuItem}
+              >
+              Register
+          </Link>
+        </>
         )
-       ))
+      }
+        
+      
     }
     
     return (
@@ -68,17 +90,6 @@ class Header extends Component{
           
           <div className={classes.menuItems}>
             <MenuItems />
-            {this.state.loggedIn && (
-              <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircleIcon />
-            </IconButton>
-            )}
           </div>
         </Toolbar>
       </AppBar>
@@ -86,4 +97,10 @@ class Header extends Component{
   }
 }
 
-export default withStyles(styles)(Header);
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(Header));

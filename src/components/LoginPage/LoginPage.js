@@ -10,6 +10,7 @@ import {validEmailRegex} from '../../helpers/validate';
 import {login} from '../../actions/userActions';
 import {styles} from './LoginPage.style';
 import {withStyles} from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 
 class LoginPage extends Component{
   state = {
@@ -25,17 +26,27 @@ class LoginPage extends Component{
 
   handleSubmit = e => {
     const validEmail = validEmailRegex.test(this.state.email)
+
     if(validEmail) {
       this.props.login(this.state.email, this.state.password);
-    } else {
+    } 
+    else {
       this.setState({...this.state, errors: 'email is not valid'})
     }
+
   }
 
   render(){
     const {classes} = this.props;
+    
+    if(this.props.currentUser.email){
       return (
-        <div className={classes.form}>
+        <Redirect to='/'></Redirect>
+      )
+    }
+
+    return (
+      <div className={classes.form}>
         <Typography variant='h5'>
           Sign in
         </Typography>
@@ -66,9 +77,6 @@ class LoginPage extends Component{
                 variant="outlined"
                 value={this.state.password}
                 onChange={this.handleChange}
-                // error={this.state.errors.password ? true : false}
-                // helperText={this.state.errors.password}
-
               />
             </div>
             <div>
@@ -84,13 +92,13 @@ class LoginPage extends Component{
           </div>
         </form>
       </div>
-      )
+    )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    serverError: state.serverError
+    currentUser: state.currentUser
   };
 };
 

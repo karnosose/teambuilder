@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import {registerUser} from '../../actions/userActions';
 
@@ -68,6 +69,11 @@ class RegisterPage extends Component{
   render(){
     const {classes} = this.props;
 
+    if(this.props.currentUser.email){
+      return (
+        <Redirect to='/'></Redirect>
+      )
+    }
     return (
       <div className={classes.form}>
         <Typography variant='h5'>
@@ -247,8 +253,11 @@ class RegisterPage extends Component{
     )
   }
 }
+
 const mapStateToProps = state => {
-  return {};
+  return {
+    currentUser: state.currentUser
+  };
 };
 
 const mapDispatchToProprs = (dispatch) => {

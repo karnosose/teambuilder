@@ -1,40 +1,23 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-
-import { editUser, getUsers } from '../../actions/userActions';
+import {connect} from 'react-redux';
 
 class Profile extends Component{
 
-    componentDidMount(){
-        this.props.getUsers()
-    }
-
-    updateProfile(){
-
-        this.props.editUser()
-    }
-
     render(){
+        
         return (
             <div>
-                {this.props.currentUser.firstName}
+                {this.props.currentUser.email}
             </div>
         )
     } 
 
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
       currentUser: state.currentUser
-    };
-  };
-  
-  const mapDispatchToProprs = (dispatch) => {
-    return {
-        getUsers: () => dispatch(getUsers()),
-        editUser: editUser
     }
-  };
-  
-  export default connect(mapStateToProps, mapDispatchToProprs)(Profile);
+  }
+
+export default connect(mapStateToProps)(Profile);

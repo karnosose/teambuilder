@@ -1,20 +1,7 @@
-import { createBrowserHistory } from 'history';
-const history = createBrowserHistory();
-
-
-export const EDIT_USER = 'edit_user';
 export const SET_CURRENT_USER = 'set_current_user';
-export const SET_SERVER_ERROR = 'SET_SERVER_ERROR';
-
+export const SET_SERVER_ERROR ='SET_SERVER_ERROR';
 
 const URL = 'https://picsart-bootcamp-2020-api.herokuapp.com/api/v1'
-
-export const editUser = (user) => {
-    return {
-        type: EDIT_USER,
-        user
-    }
-}
 
 export const setCurrentUser = user => {
     return {
@@ -23,18 +10,11 @@ export const setCurrentUser = user => {
     }
 }
 
-export const setServerError = error => {
-    return {
-        type: SET_SERVER_ERROR,
-        error
-    }
-}
-
-export const getUsers = () => {
+export const getUsers = (token) => {
     return (dispatch) => {
         fetch(`${URL}/users`, {
             headers: {
-                token: JSON.parse(localStorage.getItem('user')),
+                token: token,
             }
         })
         .then(res => res.json())
@@ -57,12 +37,9 @@ export const login = (email, password) => {
             return response.json();
         })
         .then(user => {
+            dispatch(setCurrentUser(user))
             localStorage.setItem('token', JSON.stringify(user.token));
-            history.push('/profile')
         })
-        .catch(error => 
-           dispatch(setServerError(error.message)) 
-        )
     }
 }
 
@@ -80,4 +57,11 @@ export const  registerUser = userData => {
         })
     }
     
-  }
+}
+
+export const setServerError = error => {
+    return {
+        type: SET_SERVER_ERROR,
+        error
+    }
+}

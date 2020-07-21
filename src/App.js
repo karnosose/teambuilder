@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import {connect} from 'react-redux';
 
-
+import {getUsers} from './actions/userActions'
 import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage'
 import Profile from './components/Profile/Profile'
 
-import {PrivateRoute} from './components/PrivateRoute';
-
 class App extends Component {
+
+  componentDidMount(){
+    if(localStorage.getItem('token')){
+      this.props.getUsers(JSON.parse(localStorage.getItem('token')));
+    }
+  }
 
   render() {
 
@@ -17,9 +22,9 @@ class App extends Component {
       <Router>
         <Header />
         <Switch>
-          <PrivateRoute path='/login'>
+          <Route path='/login'>
             <LoginPage />
-          </PrivateRoute>
+          </Route>
           <Route path='/register'>
             <RegisterPage />
           </Route>
@@ -33,4 +38,16 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.currentUser
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      getUsers: (token) => dispatch(getUsers(token)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
