@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import {HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {getUsers} from './actions/userActions';
@@ -23,7 +23,7 @@ class App extends Component {
   render() {
     
     return (
-      <Router>
+      <HashRouter basename='/'>
         {!this.props.currentUser.email && (
           <Redirect to='/login' />
         )}
@@ -48,7 +48,7 @@ class App extends Component {
              <Profile />
           </Route>
         </Switch>
-      </Router>
+      </HashRouter>
       
     );
   }

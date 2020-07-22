@@ -28,6 +28,7 @@ class Profile extends Component{
                     image={currentUser.avatarUrl}
                     title="Contemplative Reptile"
                 />
+                {console.log(currentUser)}
                 <CardContent className={classes.profileDetails}>
                 <Typography gutterBottom variant="h5" component="h2" className={classes.fullName}>
                     {currentUser.firstName} {currentUser.lastName}
@@ -39,13 +40,13 @@ class Profile extends Component{
                     sex: {currentUser.sex}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    Birth date: {currentUser.sex}
+                    Birth date: {currentUser.birthDate}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    Js Experience: {currentUser.sex}
+                    Js Experience: {currentUser.jsExperience}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    React Experience: {currentUser.sex}
+                    React Experience: {currentUser.reactExperience}
                 </Typography>
               
                 </CardContent>
