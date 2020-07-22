@@ -1,15 +1,15 @@
 {
-  "main.css": "/teambuilder.git/static/css/main.3528be30.chunk.css",
-  "main.js": "/teambuilder.git/static/js/main.9dad5e27.chunk.js",
-  "main.js.map": "/teambuilder.git/static/js/main.9dad5e27.chunk.js.map",
-  "static/css/1.3f84fde3.chunk.css": "/teambuilder.git/static/css/1.3f84fde3.chunk.css",
-  "static/js/1.f321206e.chunk.js": "/teambuilder.git/static/js/1.f321206e.chunk.js",
-  "static/js/1.f321206e.chunk.js.map": "/teambuilder.git/static/js/1.f321206e.chunk.js.map",
-  "runtime~main.js": "/teambuilder.git/static/js/runtime~main.5ab8271f.js",
-  "runtime~main.js.map": "/teambuilder.git/static/js/runtime~main.5ab8271f.js.map",
-  "static/css/1.3f84fde3.chunk.css.map": "/teambuilder.git/static/css/1.3f84fde3.chunk.css.map",
-  "static/css/main.3528be30.chunk.css.map": "/teambuilder.git/static/css/main.3528be30.chunk.css.map",
-  "index.html": "/teambuilder.git/index.html",
-  "precache-manifest.7fd5519ee96626111ccabc18891a94d8.js": "/teambuilder.git/precache-manifest.7fd5519ee96626111ccabc18891a94d8.js",
-  "service-worker.js": "/teambuilder.git/service-worker.js"
+  "main.css": "/teambuilder/static/css/main.3528be30.chunk.css",
+  "main.js": "/teambuilder/static/js/main.4d3cede5.chunk.js",
+  "main.js.map": "/teambuilder/static/js/main.4d3cede5.chunk.js.map",
+  "static/css/1.3f84fde3.chunk.css": "/teambuilder/static/css/1.3f84fde3.chunk.css",
+  "static/js/1.f321206e.chunk.js": "/teambuilder/static/js/1.f321206e.chunk.js",
+  "static/js/1.f321206e.chunk.js.map": "/teambuilder/static/js/1.f321206e.chunk.js.map",
+  "runtime~main.js": "/teambuilder/static/js/runtime~main.f2702090.js",
+  "runtime~main.js.map": "/teambuilder/static/js/runtime~main.f2702090.js.map",
+  "static/css/1.3f84fde3.chunk.css.map": "/teambuilder/static/css/1.3f84fde3.chunk.css.map",
+  "static/css/main.3528be30.chunk.css.map": "/teambuilder/static/css/main.3528be30.chunk.css.map",
+  "index.html": "/teambuilder/index.html",
+  "precache-manifest.aa19229475f952646c508bd35b4ebf55.js": "/teambuilder/precache-manifest.aa19229475f952646c508bd35b4ebf55.js",
+  "service-worker.js": "/teambuilder/service-worker.js"
 }
