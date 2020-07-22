@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/karnosose/teambuilder.git/precache-manifest.427643078e62440ac0a859953cf2f252.js"
+  "/teambuilder.git/precache-manifest.7fd5519ee96626111ccabc18891a94d8.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/karnosose/teambuilder.git/index.html", {
+workbox.routing.registerNavigationRoute("/teambuilder.git/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
